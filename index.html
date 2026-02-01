@@ -315,7 +315,7 @@ function fecharModal(id){document.getElementById(id).style.display="none";}
 
 <body>
 
-<a class="cta fixed-cta" href="https://wa.me/5521968415109" target="_blank">
+<a class="cta fixed-cta" href="https://wa.me/5521976167758" target="_blank">
 <i class="fa-brands fa-whatsapp"></i> Orçamento rápido
 </a>
 
@@ -406,16 +406,88 @@ function fecharModal(id){document.getElementById(id).style.display="none";}
 </section>
 
 <section id="orcamento">
-<h2>Solicite seu orçamento detalhado</h2>
-<form action="https://formsubmit.co/crpletreiros.neom@yahoo.com.br" method="POST">
-<input name="Nome" placeholder="Nome completo" required>
-<input name="Telefone" placeholder="WhatsApp" required>
-<input name="Medidas" placeholder="Medidas aproximadas">
-<textarea name="Mensagem" placeholder="Descreva sua necessidade"></textarea>
-<input type="hidden" name="_subject" value="Novo orçamento - Paixão Letreiros">
-<button type="submit">Enviar solicitação</button>
-</form>
+  <h2>Solicite seu orçamento detalhado</h2>
+
+  <form id="orcamentoForm"
+    action="https://docs.google.com/forms/d/e/1FAIpQLSe9gq-mB0I2qD29cDIHN7Hzx7qAQXiB7a3a9INT4NWqV25zrw/formResponse"
+    method="POST"
+    target="hidden_iframe"
+    onsubmit="return enviarFormulario()">
+
+    <input id="nome" name="entry.1392804287" placeholder="Nome completo" required>
+
+    <input
+      type="tel"
+      id="telefone"
+      name="entry.1602897064"
+      placeholder="WhatsApp"
+      maxlength="15"
+      required>
+
+    <input id="medidas" name="entry.1257129449" placeholder="Medidas aproximadas">
+
+    <textarea
+      id = "descricao" 
+      name="entry.637528714"
+      placeholder="Descreva sua necessidade"></textarea>
+
+    <button type="submit">Enviar solicitação</button>
+  </form>
+
+  <iframe name="hidden_iframe" style="display:none"></iframe>
 </section>
+
+<!-- MODAL DE SUCESSO -->
+<div class="modal" id="sucessoModal">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal('sucessoModal')">&times;</span>
+
+    <h3>Solicitação enviada com sucesso</h3>
+
+    <p style="text-align:center;margin-bottom:30px;">
+      Sua solicitação de orçamento foi enviada com sucesso.
+      Agradecemos o contato e a confiança. Entraremos em contato em breve.
+    </p>
+
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <a class="cta" href="https://wa.me/5521991827040" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i> Falar agora no WhatsApp
+      </a>
+
+      <a class="cta"
+         href="#"
+         onclick="fecharModal('sucessoModal')"
+         style="background:#1e293b;color:#fff;">
+        Fechar
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+let enviado = false;
+
+function enviarFormulario() {
+  if (!enviado) {
+    enviado = true;
+    setTimeout(() => {
+      document.getElementById('orcamentoForm').reset();
+      abrirModal('sucessoModal');
+    }, 800);
+  }
+  return true;
+}
+
+// MÁSCARA WHATSAPP
+document.getElementById('telefone').addEventListener('input', function (e) {
+  let value = e.target.value.replace(/\D/g, '');
+  if (value.length > 11) value = value.slice(0, 11);
+  value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+  value = value.replace(/(\d{5})(\d)/, '$1-$2');
+  e.target.value = value;
+});
+</script>
+
 
 <section>
 <h2>Mais trabalhos realizados</h2>
@@ -430,7 +502,7 @@ function fecharModal(id){document.getElementById(id).style.display="none";}
 </section>
 
 <footer>
-<p><strong>WhatsApp:</strong> (21) 96841-5109</p>
+<p><strong>WhatsApp:</strong> (21) 99182-7040</p>
 <p><strong>E-mail:</strong> crpletreiros.neom@yahoo.com.br</p>
 <p>Paixão Letreiros • Comunicação Visual • RJ</p>
 </footer>
